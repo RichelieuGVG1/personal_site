@@ -6,8 +6,91 @@
 	<title>ГЛАВНАЯ — ГУРЬЯНОВ_SITE</title>
 	<meta name="viewport" content="width=device-width, minimum scale=1.0, maximum-scale=1.0">
 	<link rel="shortcut icon" href="img/ava.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-<body style="background-color: red;">
-in work
+<body >
+
+<h1>VASILY GURYANOV SITE<br>Coming soon!</h1>
+<div id='layout'>
+
+
+
+
+
+
+<div id="countdown" class="countdown">
+  <div class="countdown-number">
+    <span class="days countdown-time"></span>
+    <span class="countdown-text">Days</span>
+  </div>
+  <div class="countdown-number">
+    <span class="hours countdown-time"></span>
+    <span class="countdown-text">Hours</span>
+  </div>
+  <div class="countdown-number">
+    <span class="minutes countdown-time"></span>
+    <span class="countdown-text">Minutes</span>
+  </div>
+  <div class="countdown-number">
+    <span class="seconds countdown-time"></span>
+    <span class="countdown-text">Seconds</span>
+  </div>
+</div>
+
+<script type="text/javascript" >
+	
+
+
+
+
+function getTimeRemaining(endtime) {
+  var now = new Date();
+  var seconds = 60 - now.getSeconds();
+  var minutes = 60 - now.getMinutes();
+  var hours = 24 - now.getHours();
+  var days = 15 - now.getDay();
+  return {
+    'total': now,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+ 
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+ 
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+ 
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+ 
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+ 
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+ 
+var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000); // for endless timer
+initializeClock('countdown', deadline);
+
+
+</script>
+
+</div>
+
 </body>
 </html>
