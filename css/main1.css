@@ -103,3 +103,26 @@ html, body{
 .blog-entry .img-wrap {
 	flex: -1 0 250px;
 }
+
+
+
+.photo-container{
+		padding-top: 40px;
+		padding-bottom: 60px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+@media(max-width: 974px){
+	.photo-container{
+		padding-top: 100px;
+	}
+}
+@media(min-width: 975px){
+	.photo-container{
+		padding-top: 40px;
+	}
+}
+
+.container-padding{
+	padding: 0px 10px;
+}
