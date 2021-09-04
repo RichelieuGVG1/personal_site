@@ -43,12 +43,13 @@ html, body{
 
 @media(max-width: 721px){
 	.front-img{
-		width: 50%;
+		width: 70%;
 	}
 	.consectetur{
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		align-content: flex-end;
 	}
 }
 
