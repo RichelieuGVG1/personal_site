@@ -41,18 +41,6 @@ html, body{
 	}
 }
 
-@media(max-width: 721px){
-	.front-img{
-		width: 70%;
-	}
-	.consectetur{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		align-content: flex-end;
-	}
-}
-
 .sp-card {
     background: gray;
     border-radius: 10px;
@@ -134,4 +122,26 @@ html, body{
 
 .site-mobile-menu .site-nav-wrap ul a{
 	padding: 0px 0px;
+}
+
+
+
+
+@media(max-width: 721px){
+	.front-image{
+		display: none;
+	}
+}
+
+
+@media(max-width: 721px){
+	.front-img{
+		width: 70%;
+	}
+	.consectetur{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-content: center;/*flex-end*/
+	}
 }
