@@ -1,0 +1,8 @@
+User-agent: *
+Allow: *
+Disallow: /scripts/*
+Disallow: /404.html
+
+
+Sitemap: http://guryanov-vasily.ru/sitemap.xml
+Host: http://guryanov-vasily.ru

@@ -127,3 +127,11 @@ html, body{
 .container-padding{
 	padding: 0px 10px;
 }
+
+.header-bar .site-logo a {
+	font-size: 17px;
+}
+
+.site-mobile-menu .site-nav-wrap ul a{
+	padding: 0px 0px;
+}
