@@ -145,3 +145,6 @@ html, body{
 		align-content: center;/*flex-end*/
 	}
 }
+body{
+	color: #a7a7a7;
+}
