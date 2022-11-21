@@ -148,3 +148,14 @@ html, body{
 body{
 	color: #a7a7a7;
 }
+
+.linked{
+	color: #2700ff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}
