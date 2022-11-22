@@ -37,7 +37,7 @@ html, body{
 }
 @media(min-width: 720px){
 	.front-img{
-		width: 100%;
+		width: 78%; /* 100% */
 	}
 }
 
@@ -136,7 +136,7 @@ html, body{
 
 @media(max-width: 721px){
 	.front-img{
-		width: 70%;
+		width: 50%; /* 70%*/
 	}
 	.consectetur{
 		display: flex;
