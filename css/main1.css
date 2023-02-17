@@ -159,3 +159,13 @@ body{
     -o-transition: .3s all ease;
     transition: .3s all ease;
 }
+
+@media(max-width: 721px){
+.center{
+	text-align: center;
+}
+@media(min-width: 722px){
+	.center{
+		text-align: left;
+	}
+}
