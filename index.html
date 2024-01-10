@@ -266,7 +266,7 @@ a.youtube:after {
     position:absolute;
     top:0;
     left:0;
-    scale: 0.1;
+    /*scale: 0.3;*/
     width:100%;
     height:100%;
     /*background-image: url('images/ytb.png') no-repeat center center;*/
@@ -279,6 +279,18 @@ a.youtube:after {
 a.youtube:hover:after {
     opacity:1;
     filter:grayscale(0%);
+}
+
+
+@media(max-width: 760px){
+    a.youtube:after {
+      scale: 0.3;
+    }
+}
+@media(min-width: 761px){
+    a.youtube:after {
+      scale: 0.6;
+    }
 }
 </style>
 
