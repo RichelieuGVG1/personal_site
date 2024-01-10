@@ -64,3 +64,11 @@ a.youtube:hover:after {
       scale: 0.6;
     }
 }
+.primary-p{
+    text-align: left; 
+    font-size: 24px; 
+    color: white;
+}
+.secondary-p{
+    font-size: 22px
+}
