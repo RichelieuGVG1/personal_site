@@ -233,7 +233,7 @@
 		display: flex;
 		justify-content: center;
 	}
-  
+  /*
   .video {
     display: flex;
     justify-content: center;
@@ -248,6 +248,34 @@
     
     width: 58%;
     height: 100%;
+}
+*/
+
+a.youtube {
+    position:relative;
+    display:block;
+}
+a.youtube img {
+    width:100%;
+    max-width:100%;
+}
+a.youtube:after {
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image: url('images/ytb.png') no-repeat center center;
+   /* background:url(/images/ytb.png) no-repeat center center;*/
+    /* саму картинку кнопки заливаем к себе на сайт */
+    transition:.2s;
+    opacity:0.7;
+    filter:grayscale(100%);
+}
+a.youtube:hover:after {
+    opacity:1;
+    filter:grayscale(0%);
 }
 </style>
 
@@ -445,10 +473,11 @@
                         <div class="col-md-12 mb-4" data-aos="fade-up">
                   <div class="d-md-flex d-block blog-entry align-items-start">
                     <div class="h-100 mr-0 mr-md-5 mb-3 img-wrap col-md-12 col-lg-12" style="flex: none;">
-                     <div class='video'>
-                      <iframe  src="https://www.youtube.com/embed/C2Dhn3h2Vg0" frameborder="0" allowfullscreen></iframe>
-                      
-                    </div>
+                     
+                     <a href="https://www.youtube.com/watch?v=C2Dhn3h2Vg0" class="youtube" data-fancybox="">
+                       <img src="https://img.youtube.com/vi/C2Dhn3h2Vg0/sddefault.jpg"/>
+                      </a>
+                    
                     <h2 class="mt-0 mb-2" style='padding-top: 10px; color: white;'>Новогоднее обращение 2024</h2>
                       
 
@@ -464,7 +493,7 @@
                   <div class="d-md-flex d-block blog-entry align-items-start">
                     <div class="h-100 mr-0 mr-md-5 mb-3 img-wrap col-md-12 col-lg-12" style="flex: none;">
                      <div class='video'>
-                      <iframe  src="https://www.youtube.com/embed/xYh11Y761dk" frameborder="0" allowfullscreen></iframe>
+                      <iframe  src="www.youtube.com/embed/xYh11Y761dk" frameborder="0" allowfullscreen></iframe>
                       
                     </div>
                     <h2 class="mt-0 mb-2" style='padding-top: 10px; color: white;'>Моя обсерватория</h2>
@@ -480,7 +509,7 @@
                   <div class="d-md-flex d-block blog-entry align-items-start">
                     <div class="h-100 mr-0 mr-md-5 mb-3 img-wrap col-md-12 col-lg-12" style="flex: none;">
                      <div class='video'>
-                      <iframe  src="https://www.youtube.com/embed/l4Bw3hgATkg" frameborder="0" allowfullscreen></iframe>
+                      <iframe  src="www.youtube.com/embed/l4Bw3hgATkg" frameborder="0" allowfullscreen></iframe>
                       
                     </div>
                     <h2 class="mt-0 mb-2" style='padding-top: 10px; color: white;'>Пародия на м/ф "Остров Сокровищ"</h2>
@@ -497,7 +526,7 @@
                   <div class="d-md-flex d-block blog-entry align-items-start">
                     <div class="h-100 mr-0 mr-md-5 mb-3 img-wrap col-md-12 col-lg-12" style="flex: none;">
                      <div class='video'>
-                      <iframe  src="https://www.youtube.com/embed/JE2PuyMs2Rk" frameborder="0" allowfullscreen></iframe>
+                      <iframe  src="www.youtube.com/embed/JE2PuyMs2Rk" frameborder="0" allowfullscreen></iframe>
                       
                     </div>
                     <h2 class="mt-0 mb-2" style='padding-top: 10px; color: white;'>Пародия на советское ТВ</h2>
@@ -516,7 +545,7 @@
                   <div class="d-md-flex d-block blog-entry align-items-start">
                     <div class="h-100 mr-0 mr-md-5 mb-3 img-wrap col-md-12 col-lg-12" style="flex: none;">
                      <div class='video'>
-                      <iframe  src="https://www.youtube.com/embed/4mSXHdLgwHA" frameborder="0" allowfullscreen></iframe>
+                      <iframe  src="www.youtube.com/embed/4mSXHdLgwHA" frameborder="0" allowfullscreen></iframe>
                       
                     </div>
                     <h2 class="mt-0 mb-2" style='padding-top: 10px; color: white;'>Переозвучка старой пасты про рабочий класс</h2>
@@ -614,7 +643,8 @@
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/aos.js"></script>
-  
+
+
 
   <script src="js/jquery.fancybox.min.js"></script>
 
