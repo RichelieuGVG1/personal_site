@@ -37,7 +37,7 @@ html, body{
 }
 @media(min-width: 720px){
 	.front-img{
-		width: 100%;
+		width: 78%; /* 100% */
 	}
 }
 
@@ -136,7 +136,7 @@ html, body{
 
 @media(max-width: 721px){
 	.front-img{
-		width: 70%;
+		width: 50%; /* 70%*/
 	}
 	.consectetur{
 		display: flex;
@@ -147,4 +147,25 @@ html, body{
 }
 body{
 	color: #a7a7a7;
+}
+
+.linked{
+	color: #2700ff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}
+
+@media(max-width: 721px){
+.center{
+	text-align: center;
+}
+@media(min-width: 722px){
+	.center{
+		text-align: left;
+	}
 }
