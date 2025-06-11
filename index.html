@@ -169,34 +169,34 @@
 
     <div class="container-fluid">
 
-      <section class="site-section darken-bg" id="section-photos" style="padding-top: 50px; padding-bottom: 50px">
+      <section class="site-section darken-bg" id="section-photos" style="padding-top: 10px; padding-bottom: 10px">
   <div class="container">
-    <div class="row justify-content-center mb-5">
+    <div class="row justify-content-center mb-4">
       <div class="col-md-12 text-center">
         <h1 class="heading text-uppercase text-white" style="font-size: 43px">разделы галереи</h1>
         <h2 class="text-uppercase text-white" style="font-size: 20px;">Выбери направление и погрузись в атмосферу</h2>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
       <!-- Карточка -->
-      <div class="col-md-6 mb-4">
-        <a href="architecture.html" class="photo-tile d-block position-relative" style="background-image: url('images/architecture.webp');">
+      <div class="col-12 col-sm-6 col-lg-6">
+        <a href="architecture.html" class="photo-tile d-block position-relative" style="padding-bottom: 5px; background-image: url('images/architecture.webp');">
           <div class="overlay d-flex align-items-center justify-content-center">
             <h3 class="text-white text-uppercase">архитектура</h3>
           </div>
         </a>
       </div>
 
-      <div class="col-md-6 mb-4">
-        <a href="people.html" class="photo-tile d-block position-relative" style="background-image: url('images/people.webp');">
+      <div class="col-12 col-sm-6 col-lg-6">
+        <a href="people.html" class="photo-tile d-block position-relative" style="padding-bottom: 5px;background-image: url('images/people.webp');">
           <div class="overlay d-flex align-items-center justify-content-center">
             <h3 class="text-white text-uppercase">люди</h3>
           </div>
         </a>
       </div>
 
-      <div class="col-md-6 mb-4">
+      <div class="col-12 col-sm-6 col-lg-6">
         <a href="nature.html" class="photo-tile d-block position-relative" style="background-image: url('images/nature.webp');">
           <div class="overlay d-flex align-items-center justify-content-center">
             <h3 class="text-white text-uppercase">природа</h3>
@@ -204,7 +204,7 @@
         </a>
       </div>
 
-      <div class="col-md-6 mb-4">
+      <div class="col-12 col-sm-6 col-lg-6">
         <a href="astro.html" class="photo-tile d-block position-relative" style="background-image: url('images/astrophoto.webp');">
           <div class="overlay d-flex align-items-center justify-content-center">
             <h3 class="text-white text-uppercase">астрофото</h3>
@@ -217,16 +217,13 @@
 
 <style>
 .photo-tile {
-  height: 300px;
+  height: 33vh;
+  max-height: 240px;
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  transition: transform 0.5s ease;
-}
-
-.photo-tile:hover {
-  transform: scale(1.05);
-  z-index: 2;
+  border-radius: 6px;
+  position: relative;
 }
 
 .photo-tile .overlay {
@@ -234,10 +231,38 @@
   height: 100%;
   width: 100%;
   transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-tile:hover .overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.photo-tile::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: inherit;
+  z-index: 0;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.photo-tile:hover::before {
+  transform: scale(1.05);
+}
+
+.photo-tile h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
 }
 </style>
 
