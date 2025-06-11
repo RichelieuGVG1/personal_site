@@ -169,35 +169,77 @@
 
     <div class="container-fluid">
 
-      <section class="site-section darken-bg" id="section-photos" style='padding-top: 50px; padding-bottom: 50px'>
-        <div class='container'>
-        <div class="col-12">
-        <div class="row align-items-stretch ded justify-content-center">
-        <div class="col-md-12 text-center">
-
-        <div class='row align-items-center photo-container' style="text-align: center; padding-top: 0px;">
-          <h1 class="heading text-uppercase text-white col-12" style='font-size: 43px'>мои фотографии</h1>
-          <p>&nbsp;</p>
-          <h2 class='col-12 text-uppercase text-white' style="text-align: center; font-size: 20px;">Лучшие из лучших моих фотографий находятся здесь:</h2>
-
-       </div>
-
-       <div class="row form-group">
-                      <div class="col-md-12">
-                        <a href="photos.html">
-                        <input type="submit" value="посмотреть фотографии" class="btn btn-primary btn-md text-white">
-                      </a>
-                      </div>
-                    </div>
-       
-
-        </div>
-
+      <section class="site-section darken-bg" id="section-photos" style="padding-top: 50px; padding-bottom: 50px">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-12 text-center">
+        <h1 class="heading text-uppercase text-white" style="font-size: 43px">разделы галереи</h1>
+        <h2 class="text-uppercase text-white" style="font-size: 20px;">Выбери направление и погрузись в атмосферу</h2>
       </div>
-        
     </div>
+
+    <div class="row">
+      <!-- Карточка -->
+      <div class="col-md-6 mb-4">
+        <a href="architecture.html" class="photo-tile d-block position-relative" style="background-image: url('images/architecture.webp');">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">архитектура</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <a href="people.html" class="photo-tile d-block position-relative" style="background-image: url('images/people.webp');">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">люди</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <a href="nature.html" class="photo-tile d-block position-relative" style="background-image: url('images/nature.webp');">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">природа</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <a href="astro.html" class="photo-tile d-block position-relative" style="background-image: url('images/astrophoto.webp');">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">астрофото</h3>
+          </div>
+        </a>
+      </div>
     </div>
-      </section> 
+  </div>
+</section>
+
+<style>
+.photo-tile {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+
+.photo-tile:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.photo-tile .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.photo-tile:hover .overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+</style>
 
       <section class="site-section " id="projects">
         <div class="container">
