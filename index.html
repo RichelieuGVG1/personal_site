@@ -91,15 +91,16 @@
 
     <div class="main-menu">
       <ul class="js-clone-nav">
-        <li><a href="#home" class="nav-link">Главная</a></li>
-        <li><a href="photos.html" class="nav-link">Фотографии</a></li>
+        <li><a href="index.html" class="nav-link">Главная</a></li>
+        <li><a href="photos.html" class="nav-link">Архитектура</a></li>
+        <li><a href="people.html" class="nav-link">Люди</a></li>
+        <li><a href="nature.html" class="nav-link">Природа</a></li>
         <li><a href="astro.html" class="nav-link">Астрофото</a></li>
         <li><a href="#projects" class="nav-link">Проекты</a></li>
         <li><a href="#videos" class="nav-link">YouTube</a></li>
-        <li><a href="#contacts" class="nav-link">Контакты</a></li>
       </ul>
       <ul class="social js-clone-nav">
-        <li><a href="https://t.me/guryanov_vasily" target='_blank'  style="padding-left: 7px; padding-right: 7px;">
+        <li><a href="https://t.me/gur_chn" target='_blank'  style="padding-left: 7px; padding-right: 7px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
 </svg>
@@ -169,37 +170,104 @@
 
     <div class="container-fluid">
 
-      <section class="site-section darken-bg" id="section-photos" style='padding-top: 50px; padding-bottom: 50px'>
-        <div class='container'>
-        <div class="col-12">
-        <div class="row align-items-stretch ded justify-content-center">
-        <div class="col-md-12 text-center">
-
-        <div class='row align-items-center photo-container' style="text-align: center; padding-top: 0px;">
-          <h1 class="heading text-uppercase text-white col-12" style='font-size: 43px'>мои фотографии</h1>
-          <p>&nbsp;</p>
-          <h2 class='col-12 text-uppercase text-white' style="text-align: center; font-size: 20px;">Лучшие из лучших моих фотографий находятся здесь:</h2>
-
-       </div>
-
-       <div class="row form-group">
-                      <div class="col-md-12">
-                        <a href="photos.html">
-                        <input type="submit" value="посмотреть фотографии" class="btn btn-primary btn-md text-white">
-                      </a>
-                      </div>
-                    </div>
-       
-
-        </div>
-
+     <section class="site-section darken-bg" id="section-photos" style="padding-top: 10px; padding-bottom: 10px">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-12 text-center">
+        <h1 class="heading text-uppercase text-white" style="font-size: 43px; margin-bottom: 15px; margin-top: 35px;">МОЯ ФОТОГРАФИЯ</h1>
       </div>
-        
     </div>
-    </div>
-      </section> 
 
-      <section class="site-section " id="projects">
+    <div class="row g-4">
+      <!-- Карточка -->
+      <div class="col-12 col-sm-6 col-lg-6" style='margin-bottom: 10px;'>
+        <a href="photos.html" class="photo-tile d-block position-relative">
+          <img src="previews/arch.jpg" alt="архитектура" class="tile-img">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">архитектура</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-6" style='margin-bottom: 10px;'>
+        <a href="people.html" class="photo-tile d-block position-relative">
+          <img src="previews/ppl.jpg" alt="люди" class="tile-img">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">люди</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-6"  style='margin-bottom: 10px;'>
+        <a href="nature.html" class="photo-tile d-block position-relative">
+          <img src="previews/natur.jpg" alt="природа" class="tile-img">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">природа</h3>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-6"  style='margin-bottom: 10px;'>
+        <a href="astro.html" class="photo-tile d-block position-relative">
+          <img src="previews/astro.jpg" alt="астрофото" class="tile-img">
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <h3 class="text-white text-uppercase">астрофото</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.photo-tile {
+  height: 33vh;
+  max-height: 340px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.photo-tile:hover .tile-img {
+  transform: scale(1.05);
+}
+
+.photo-tile .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.photo-tile:hover .overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.photo-tile h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+</style>
+
+
+      <section class="site-section " id="projects" style="
+    padding-top: 70px;
+">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-md-12 text-center">
@@ -539,7 +607,16 @@
         </div>
       </section>
 -->
-<hr>
+<hr class="section-divider">
+<style>
+.section-divider {
+  border: none;
+  border-top: 2px solid #777;
+  margin: 40px auto;
+  width: 80%;
+}
+</style>
+
       <div class="row justify-content-center">
         <div class="col-md-12 text-center py-5">
         	
