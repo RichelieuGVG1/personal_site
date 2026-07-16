@@ -1,270 +1,240 @@
- AOS.init({
- 	duration: 800,
- 	easing: 'slide',
- 	once: false
- });
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1. Mobile Menu Drawer Toggle ---
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
 
-jQuery(document).ready(function($) {
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', () => {
+      const isActive = menuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('active', isActive);
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    });
 
-	"use strict";
+    // Close menu when a link inside is clicked
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
-	
+  // --- 2. Custom Scroll Snap Carousel Logic ---
+  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    const container = wrapper.querySelector('.carousel-container');
+    const prevBtn = wrapper.querySelector('.carousel-btn-prev');
+    const nextBtn = wrapper.querySelector('.carousel-btn-next');
 
-	var siteMenuClone = function() {
+    if (container && prevBtn && nextBtn) {
+      const getScrollAmount = () => {
+        const firstSlide = container.querySelector('.carousel-slide');
+        return firstSlide ? firstSlide.clientWidth + 24 : container.clientWidth * 0.8;
+      };
 
-		$('.js-clone-nav').each(function() {
-			var $this = $(this);
-			$this.clone().attr('class', 'site-nav-wrap').appendTo('.site-mobile-menu-body');
-		});
-
-
-		setTimeout(function() {
-			
-			var counter = 0;
-      $('.site-mobile-menu .has-children').each(function(){
-        var $this = $(this);
-        
-        $this.prepend('<span class="arrow-collapse collapsed">');
-
-        $this.find('.arrow-collapse').attr({
-          'data-toggle' : 'collapse',
-          'data-target' : '#collapseItem' + counter,
-        });
-
-        $this.find('> ul').attr({
-          'class' : 'collapse',
-          'id' : 'collapseItem' + counter,
-        });
-
-        counter++;
-
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
       });
 
-    }, 1000);
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      });
 
-		$('body').on('click', '.arrow-collapse', function(e) {
-      var $this = $(this);
-      if ( $this.closest('li').find('.collapse').hasClass('show') ) {
-        $this.removeClass('active');
-      } else {
-        $this.addClass('active');
-      }
-      e.preventDefault();  
-      
-    });
+      // Optional: hide/show navigation buttons based on scroll position
+      const toggleButtons = () => {
+        const isStart = container.scrollLeft <= 5;
+        const isEnd = container.scrollLeft + container.clientWidth >= container.scrollHeight - 5; // wait, scrollLeft + clientWidth >= scrollWidth - 5
+        // Wait, for horizontal scroll, it is scrollWidth, not scrollHeight!
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        prevBtn.style.opacity = isStart ? '0.3' : '1';
+        prevBtn.style.pointerEvents = isStart ? 'none' : 'auto';
+        nextBtn.style.opacity = container.scrollLeft >= maxScroll - 5 ? '0.3' : '1';
+        nextBtn.style.pointerEvents = container.scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
+      };
 
-		$(window).resize(function() {
-			var $this = $(this),
-				w = $this.width();
+      container.addEventListener('scroll', toggleButtons);
+      // Run once on load
+      setTimeout(toggleButtons, 300);
+      window.addEventListener('resize', toggleButtons);
+    }
+  });
 
-			if ( w > 768 ) {
-				if ( $('body').hasClass('offcanvas-menu') ) {
-					$('body').removeClass('offcanvas-menu');
-				}
-			}
-		})
+  // --- 3. Custom Native Lightbox Dialog System ---
+  // Create and inject the dialog element if not already present
+  let lightbox = document.getElementById('lightbox-dialog');
+  if (!lightbox) {
+    lightbox = document.createElement('dialog');
+    lightbox.id = 'lightbox-dialog';
+    lightbox.className = 'lightbox-dialog';
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close-btn" aria-label="Close lightbox">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <button class="lightbox-arrow lightbox-arrow-prev" aria-label="Previous image">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <div class="lightbox-img-wrapper">
+          <img src="" alt="" id="lightbox-img" />
+        </div>
+        <button class="lightbox-arrow lightbox-arrow-next" aria-label="Next image">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+  }
 
-		$('body').on('click', '.js-menu-toggle', function(e) {
-			var $this = $(this);
-			e.preventDefault();
+  const lightboxImg = lightbox.querySelector('#lightbox-img');
+  const lightboxCaption = lightbox.querySelector('#lightbox-caption');
+  const closeBtn = lightbox.querySelector('.lightbox-close-btn');
+  const prevArrow = lightbox.querySelector('.lightbox-arrow-prev');
+  const nextArrow = lightbox.querySelector('.lightbox-arrow-next');
 
-			if ( $('body').hasClass('offcanvas-menu') ) {
-				$('body').removeClass('offcanvas-menu');
-				$this.removeClass('active');
-			} else {
-				$('body').addClass('offcanvas-menu');
-				$this.addClass('active');
-			}
-		}) 
+  let activeGallery = [];
+  let currentIndex = -1;
 
-		// click outisde offcanvas
-		$(document).mouseup(function(e) {
-	    var container = $(".site-mobile-menu");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
-	      if ( $('body').hasClass('offcanvas-menu') ) {
-					$('body').removeClass('offcanvas-menu');
-				}
-	    }
-		});
-	}; 
-	siteMenuClone();
+  const openLightbox = (index) => {
+    if (index < 0 || index >= activeGallery.length) return;
+    currentIndex = index;
+    const item = activeGallery[currentIndex];
 
+    // Smooth transition between images
+    lightboxImg.style.opacity = '0';
+    lightboxImg.style.transform = 'scale(0.97)';
+    
+    setTimeout(() => {
+      lightboxImg.src = item.href;
+      lightboxImg.alt = item.caption;
+      lightboxCaption.textContent = item.caption;
+      lightboxImg.style.opacity = '1';
+      lightboxImg.style.transform = 'scale(1)';
+    }, 150);
 
-	var sitePlusMinus = function() {
-		$('.js-btn-minus').on('click', function(e){
-			e.preventDefault();
-			if ( $(this).closest('.input-group').find('.form-control').val() != 0  ) {
-				$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) - 1);
-			} else {
-				$(this).closest('.input-group').find('.form-control').val(parseInt(0));
-			}
-		});
-		$('.js-btn-plus').on('click', function(e){
-			e.preventDefault();
-			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
-		});
-	};
-	// sitePlusMinus();
-
-
-	var siteSliderRange = function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 500,
-      values: [ 75, 300 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-      }
-    });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	};
-	// siteSliderRange();
-
-
-	var siteMagnificPopup = function() {
-		$('.image-popup').magnificPopup({
-	    type: 'image',
-	    closeOnContentClick: true,
-	    closeBtnInside: false,
-	    fixedContentPos: true,
-	    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-	     gallery: {
-	      enabled: true,
-	      navigateByImgClick: true,
-	      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-	    },
-	    image: {
-	      verticalFit: true
-	    },
-	    zoom: {
-	      enabled: true,
-	      duration: 300 // don't foget to change the duration also in CSS
-	    }
-	  });
-
-	  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-	    disableOn: 700,
-	    type: 'iframe',
-	    mainClass: 'mfp-fade',
-	    removalDelay: 160,
-	    preloader: false,
-
-	    fixedContentPos: false
-	  });
-	};
-	siteMagnificPopup();
-
-
-	var siteCarousel = function () {
-		if ( $('.nonloop-block-13').length > 0 ) {
-			$('.nonloop-block-13').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
-		    margin: 0,
-		    autoplay: false,
-		    nav: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 0,
-	        	nav: true,
-	          items: 2
-	        },
-	        1000:{
-	        	margin: 0,
-	        	stagePadding: 0,
-	        	nav: true,
-	          items: 3
-	        },
-	        1200:{
-	        	margin: 0,
-	        	stagePadding: 0,
-	        	nav: true,
-	          items: 4
-	        }
-		    }
-			});
-		}
-
-		$('.slide-one-item').owlCarousel({
-	    center: false,
-	    items: 1,
-	    loop: true,
-			stagePadding: 0,
-	    margin: 0,
-	    dots: true,
-	    autoplay: false,
-	    pauseOnHover: false,
-	    nav: true,
-	    navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
-	  });
-	};
-	siteCarousel();
-
-	var siteStellar = function() {
-		$(window).stellar({
-	    responsive: false,
-	    parallaxBackgrounds: true,
-	    parallaxElements: true,
-	    horizontalScrolling: false,
-	    hideDistantElements: false,
-	    scrollProperty: 'scroll'
-	  });
-	};
-	siteStellar();
-
-	var siteCountDown = function() {
-
-		$('#date-countdown').countdown('2020/10/10', function(event) {
-		  var $this = $(this).html(event.strftime(''
-		    + '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
-		    + '<span class="countdown-block"><span class="label">%d</span> days </span>'
-		    + '<span class="countdown-block"><span class="label">%H</span> hr </span>'
-		    + '<span class="countdown-block"><span class="label">%M</span> min </span>'
-		    + '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
-		});
-				
-	};
-	siteCountDown();
-
-	var siteDatePicker = function() {
-
-		if ( $('.datepicker').length > 0 ) {
-			$('.datepicker').datepicker();
-		}
-
-	};
-	siteDatePicker();
-
-	// navigation
-  var OnePageNavigation = function() {
-    var navToggler = $('.site-menu-toggle');
-   	$("body").on("click", ".main-menu li a[href^='#'], .smoothscroll[href^='#'], .site-mobile-menu .site-nav-wrap li a", function(e) {
-      //e.preventDefault();
-      var hash = this.hash;
-        $('html, body').animate({
-          'scrollTop': $(hash).offset().top
-        }, 800, 'swing', function(){
-          window.location.hash = hash;
-        });
-
-    });
-
-
-    // $("#menu li a[href^='#']").on('click', function(e){
-    //   e.preventDefault();
-    //   navToggler.trigger('click');
-    // });
-
-    $('body').on('activate.bs.scrollspy', function () {
-      // console.log('nice');
-      // alert('yay');
-    })
+    if (!lightbox.open) {
+      lightbox.showModal();
+      document.body.style.overflow = 'hidden';
+    }
   };
-  OnePageNavigation();
 
+  const closeLightbox = () => {
+    lightbox.close();
+    document.body.style.overflow = '';
+  };
+
+  const showNext = () => {
+    if (activeGallery.length <= 1) return;
+    const nextIndex = (currentIndex + 1) % activeGallery.length;
+    openLightbox(nextIndex);
+  };
+
+  const showPrev = () => {
+    if (activeGallery.length <= 1) return;
+    const prevIndex = (currentIndex - 1 + activeGallery.length) % activeGallery.length;
+    openLightbox(prevIndex);
+  };
+
+  // Attach gallery item event listeners
+  const initGalleries = () => {
+    const galleryLinks = Array.from(document.querySelectorAll('a[data-fancybox]'));
+    
+    // Group links by their gallery attribute
+    const galleries = {};
+    galleryLinks.forEach(link => {
+      const groupName = link.getAttribute('data-fancybox') || 'default';
+      if (!galleries[groupName]) {
+        galleries[groupName] = [];
+      }
+      galleries[groupName].push(link);
+    });
+
+    // Setup click handlers
+    Object.keys(galleries).forEach(groupName => {
+      const items = galleries[groupName];
+      items.forEach((link, idx) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Build structure for active gallery items
+          activeGallery = items.map(el => ({
+            href: el.getAttribute('href'),
+            caption: el.getAttribute('data-caption') || el.getAttribute('title') || ''
+          }));
+          openLightbox(idx);
+        });
+      });
+    });
+  };
+
+  initGalleries();
+
+  // Lightbox navigation event listeners
+  closeBtn.addEventListener('click', closeLightbox);
+  prevArrow.addEventListener('click', showPrev);
+  nextArrow.addEventListener('click', showNext);
+
+  // Close lightbox on clicking backdrop
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.open) return;
+    if (e.key === 'ArrowRight') showNext();
+    else if (e.key === 'ArrowLeft') showPrev();
+    else if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Simple touch swipe support for lightbox mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+      showNext(); // swipe left, show next
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      showPrev(); // swipe right, show prev
+    }
+  };
+
+  // --- 4. Lightweight Scroll Reveal Observer (AOS Replacement) ---
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Once animated, we don't need to observe it anymore
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    // Fallback if IntersectionObserver is not supported
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
 });
